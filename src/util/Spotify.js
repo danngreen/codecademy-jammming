@@ -2,7 +2,7 @@ let accessToken = "";
 let expiresIn = 0;
 const client_id = "8c34b5dec6b4435390197ce8441abc9c";
 //const redirectURI = "http://localhost:3000/"; 
-const redirectURI = "http://different-taste.surge.sh/"; 
+const redirectURI = "https://different-taste.surge.sh/"; 
 
 const Spotify = {
 
