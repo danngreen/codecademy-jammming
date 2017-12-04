@@ -15,7 +15,7 @@ class Playlist extends Component {
 	}
 
 	handleSave(e){
-		this.props.onChangeTitle(); //Todo: why not pass the title here? we could make it a state of PLaylist instead of App
+		this.props.onSave(); //Todo: why not pass the title here? we could make it a state of PLaylist instead of App
 	}
 
 	render() {

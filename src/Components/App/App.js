@@ -5,6 +5,8 @@ import SearchResults from '../SearchResults/SearchResults';
 import Playlist from '../Playlist/Playlist';
 import { Spotify } from '../../util/Spotify';
 
+const defaultPlaylistTitle = "New Playlist";
+
 class App extends Component {
 	constructor(props) {
 		super(props);
@@ -14,7 +16,7 @@ class App extends Component {
 			],
 			playlistTracks: [
 			],
-			playlistTitle: 'New Playlist',
+			playlistTitle: defaultPlaylistTitle,
 			loadingText: " "
 		};
 
@@ -58,13 +60,22 @@ class App extends Component {
 		}
 	}
 
-	savePlaylist(playlistTitle, playlistTracks) {
-		let trackURIs = [];
+	savePlaylist() {
+		if (this.state.playlistTitle && this.state.playlistTracks.length) {
+			let trackURIs = [];
 
-		this.state.playlistTracks.foreach( t => {
-			trackURIs.push( t.uri );
-		});
-		//Spotify.saveplaylist(trackURIs, this.state.playTitle);
+			this.state.playlistTracks.forEach( t => {
+				trackURIs.push( t.uri );
+			});
+
+			Spotify.savePlaylist(trackURIs, this.state.playTitle);
+			// .then( snapshot_id => {
+				this.setState({
+					playlistTitle: defaultPlaylistTitle,
+					searchResultTracks: []
+				});
+			// } );
+		}
 	}
 
 	setPlaylistTitle(title) {
