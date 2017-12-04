@@ -21,7 +21,7 @@ class Playlist extends Component {
 	render() {
 		return (
 			<div className="Playlist">
-				<input defaultValue={this.props.title} onChange={this.handleTitleChange}/>
+				<input value={this.props.title} onChange={this.handleTitleChange}/>
 				<TrackList
 					tracks={this.props.tracks}
 					listType="playlist"

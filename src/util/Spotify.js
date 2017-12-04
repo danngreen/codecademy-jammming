@@ -94,7 +94,8 @@ const Spotify = {
 	},
 
 	savePlaylist(trackURIs, playlistTitle) {
-		console.log("saving play list");
+		console.log(`saving play list, title=${playlistTitle}`);
+		console.log(trackURIs);
 		//if (!trackURIs.length || !playlistTitle) return;
 
 		this.getAccessToken();
@@ -166,15 +167,18 @@ const Spotify = {
 								else					throw new Error('No jsonResponse.id (playlist ID)');
 							}
 						).then(
-							snapshot_id => console.log(`New playlist snapshot_id=${snapshot_id}`)
+							snapshot_id => {
+								console.log(`New playlist snapshot_id=${snapshot_id}`);
+								return snapshot_id;
+							}
 
-						).catch(errorTerms => { console.log(errorTerms); } );
+						).catch(errorTerms => { console.log(errorTerms.message); } );
 
 					}
-				).catch(errorTerms => { console.log(errorTerms); } );
+				).catch(errorTerms => { console.log(errorTerms.message); } );
 
 			}
-		).catch(errorTerms => { console.log(errorTerms); } );
+		).catch(errorTerms => { console.log(errorTerms.message); } );
 
 	}
 

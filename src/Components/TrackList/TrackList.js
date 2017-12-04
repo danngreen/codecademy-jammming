@@ -3,10 +3,6 @@ import './TrackList.css';
 import Track from '../Track/Track';
 
 class TrackList extends Component {
- 	constructor(props) {
-		super(props);
-	}
-
 	render() {
 		if (this.props.tracks){
 			return (
@@ -25,8 +21,6 @@ class TrackList extends Component {
 					}
 			 	</div>
 			);
-		} else {
-			console.log(this);
 		}
 	}
 }

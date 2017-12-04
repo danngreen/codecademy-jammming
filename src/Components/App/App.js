@@ -24,7 +24,7 @@ class App extends Component {
 		this.setPlaylistTitle	= this.setPlaylistTitle.bind(this);
 		this.addTrack			= this.addTrack.bind(this);
 		this.removeTrack		= this.removeTrack.bind(this);
-		this.savePlaylist		= this.savePlaylist.bind(this);
+		this.saveSpotifyPlaylist= this.saveSpotifyPlaylist.bind(this);
 		this.handleLoad 		= this.handleLoad.bind(this);
 	}
 
@@ -60,21 +60,38 @@ class App extends Component {
 		}
 	}
 
-	savePlaylist() {
+	saveSpotifyPlaylist() {
 		if (this.state.playlistTitle && this.state.playlistTracks.length) {
+
+			const newPlaylistTitle = this.state.playlistTitle;
+
+			this.setState({loadingText: `Saving Playlist ${newPlaylistTitle}...`});
+
 			let trackURIs = [];
 
-			this.state.playlistTracks.forEach( t => {
-				trackURIs.push( t.uri );
+			this.state.playlistTracks.forEach( track => {
+				trackURIs.push( track.uri );
 			});
 
-			Spotify.savePlaylist(trackURIs, this.state.playTitle);
-			// .then( snapshot_id => {
+			Spotify.savePlaylist(trackURIs, newPlaylistTitle)
+			.then( snapshot_id => {
+				console.log(`Playlist saved! ${snapshot_id}`);
+
 				this.setState({
-					playlistTitle: defaultPlaylistTitle,
-					searchResultTracks: []
+					searchResultTracks: [],
+					playlistTracks: [],
+					playlistTitle: defaultPlaylistTitle
 				});
-			// } );
+				this.setState({loadingText: `Playlist ${newPlaylistTitle} saved!`});
+				return;
+
+			} ).catch(errorTerms => console.log(`Error: ${errorTerms.message}`) );
+
+			this.setState({loadingText: `Playlist ${newPlaylistTitle} could not be saved :(`});
+
+		} else {
+			this.setState({loadingText: `Please add tracks and enter a title to save a playlist`});
+
 		}
 	}
 
@@ -129,7 +146,7 @@ class App extends Component {
 							title={this.state.playlistTitle}
 							onChangeTitle={this.setPlaylistTitle} 
 							onTrackAction={this.removeTrack}
-							onSave={this.savePlaylist}
+							onSave={this.saveSpotifyPlaylist}
 						/>
 					</div>
 				</div>
