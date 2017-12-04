@@ -40,7 +40,7 @@ class App extends Component {
 
 		if (stateMatch) {
 			if (stateMatch[1].length) {
-				console.log(`Cached search terms found: ${stateMatch[1]}`);
+				//console.log(`Cached search terms found: ${stateMatch[1]}`);
 				this.searchSpotify(stateMatch[1]);
 			}
 		}
@@ -68,14 +68,13 @@ class App extends Component {
 			this.setState({loadingText: `Saving Playlist ${newPlaylistTitle}...`});
 
 			let trackURIs = [];
-
 			this.state.playlistTracks.forEach( track => {
 				trackURIs.push( track.uri );
 			});
 
 			Spotify.savePlaylist(trackURIs, newPlaylistTitle)
 			.then( snapshot_id => {
-				console.log(`Playlist saved! ${snapshot_id}`);
+				//console.log(`Playlist saved! ${snapshot_id}`);
 
 				this.setState({
 					searchResultTracks: [],

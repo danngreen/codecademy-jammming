@@ -14,11 +14,11 @@ const Spotify = {
 
 		// Check if we already have an accessToken
 		if (accessToken) {
-			console.log(`Have access token already ${accessToken}`);
+			//console.log(`Have access token already ${accessToken}`);
 			return accessToken;
 		}
 
-		console.log(`Do not have access token already!`);
+		//console.log(`Do not have access token already!`);
 
 		// Check if we find the access token in the URL
 		const loc 				= window.location.href;
@@ -37,7 +37,7 @@ const Spotify = {
 		}
 
 		// Request the access token using the Spotify API
-		console.log('Initiating a request for an access_token');
+		//console.log('Initiating a request for an access_token');
 
 		//Todo: this might be better to use for state (state=${randomNum})
 		//const randomNum= Math.floor(Math.random() * 10000);
@@ -87,16 +87,16 @@ const Spotify = {
 					);
 					return searchResults;
 				}
-				console.log("No json response");
+				//console.log("No json response");
 				return[];
 			}
 		).catch(errorTerms => { console.log(errorTerms); } );
 	},
 
 	savePlaylist(trackURIs, playlistTitle) {
-		console.log(`saving play list, title=${playlistTitle}`);
-		console.log(trackURIs);
-		//if (!trackURIs.length || !playlistTitle) return;
+		//console.log(`saving play list, title=${playlistTitle}`);
+		//console.log(trackURIs);
+		if (!trackURIs.length || !playlistTitle) return;
 
 		this.getAccessToken();
 
@@ -115,7 +115,7 @@ const Spotify = {
 			}
 		).then(
 			jsonResponse => {
-				console.log(`user ID = ${jsonResponse.id}`);
+				//console.log(`user ID = ${jsonResponse.id}`);
 				if (jsonResponse.id)	return jsonResponse.id;
 				else					throw new Error('No jsonResponse.id (user ID)');
 			}
@@ -139,7 +139,7 @@ const Spotify = {
 					}
 				).then(
 					jsonResponse => {
-						console.log(`playlist ID = ${jsonResponse.id}`);
+						//console.log(`playlist ID = ${jsonResponse.id}`);
 						if (jsonResponse.id)	return jsonResponse.id;
 						else					throw new Error('No jsonResponse.id (playlist ID)');
 					}
@@ -151,7 +151,7 @@ const Spotify = {
 							headers: {Authorization: `Bearer ${accessToken}`, 'Content-Type': 'application/json'},
 							body: JSON.stringify({uris: trackURIs})
 						};
-						console.log(trackPostData);
+						//console.log(trackPostData);
 
 						const addTracksRequestURL = `https://api.spotify.com/v1/users/${userID}/playlists/${playlistID}/tracks`;
 
@@ -168,7 +168,7 @@ const Spotify = {
 							}
 						).then(
 							snapshot_id => {
-								console.log(`New playlist snapshot_id=${snapshot_id}`);
+								//console.log(`New playlist snapshot_id=${snapshot_id}`);
 								return snapshot_id;
 							}
 
