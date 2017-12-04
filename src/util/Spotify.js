@@ -26,7 +26,7 @@ const Spotify = {
 		const expiresInMatch 	= loc.match(/expires_in=([^&]*)/);
 
 		if (accessTokenMatch && expiresInMatch) {
-			console.log('Access token found in URL');
+			//console.log('Access token found in URL');
 			accessToken = accessTokenMatch[1];
 			expiresIn = expiresInMatch[1];
 
