@@ -84,9 +84,10 @@ class App extends Component {
 				this.setState({loadingText: `Playlist ${newPlaylistTitle} saved!`});
 				return;
 
-			} ).catch(errorTerms => console.log(`Error: ${errorTerms.message}`) );
-
-			this.setState({loadingText: `Playlist ${newPlaylistTitle} could not be saved :(`});
+			} ).catch(errorTerms => {
+				console.log(`Error: ${errorTerms.message}`);
+				this.setState({loadingText: `Playlist ${newPlaylistTitle} could not be saved :(`});
+			} );
 
 		} else {
 			this.setState({loadingText: `Please add tracks and enter a title to save a playlist`});
