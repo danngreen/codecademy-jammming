@@ -1,8 +1,8 @@
 let accessToken = "";
 let expiresIn = 0;
 const client_id = "8c34b5dec6b4435390197ce8441abc9c";
-//const redirectURI = "http://localhost:3000/"; 
-const redirectURI = "https://different-taste.surge.sh/"; 
+const redirectURI = "http://localhost:3000/"; 
+//const redirectURI = "https://different-taste.surge.sh/"; 
 
 const Spotify = {
 
@@ -81,7 +81,8 @@ const Spotify = {
 								song: track.name,
 								artist: track.artists[0].name,
 								album: track.album.name,
-								uri: track.uri
+								uri: track.uri,
+								previewUrl: track.preview_url
 							});
 						}
 					);
